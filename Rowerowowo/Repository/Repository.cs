@@ -6,12 +6,12 @@ namespace Rowerowowo.Repository;
 
 public class Repository<TModel> : IRepository<TModel> where TModel : class, IEntity<int>
 {
-    protected readonly InMemoryDBContext _context;
+    protected readonly InMemoryDBContext _repository;
     protected readonly DbSet<TModel> _set;
 
     public Repository(InMemoryDBContext context)
     {
-        _context = context;
+        _repository = context;
         _set = context.Set<TModel>();
     }
 
@@ -24,7 +24,6 @@ public class Repository<TModel> : IRepository<TModel> where TModel : class, IEnt
 
     public virtual async Task Delete(TModel model)
     {
-
         _set.Remove(model);
         await Save();
     }
@@ -46,12 +45,12 @@ public class Repository<TModel> : IRepository<TModel> where TModel : class, IEnt
 
     public virtual async Task<TModel> Update(TModel model)
     {
-        _context.Entry(model).State = EntityState.Modified;
+        _repository.Entry(model).State = EntityState.Modified;
         await Save();
         return model;
     }
     public virtual async Task Save()
     {
-        await _context.SaveChangesAsync();
+        await _repository.SaveChangesAsync();
     }
 }

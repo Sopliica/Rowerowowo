@@ -1,11 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.Rendering;
-using Microsoft.EntityFrameworkCore;
-using Rowerowowo.InMemoryDbContext;
+﻿using Microsoft.AspNetCore.Mvc;
 using Rowerowowo.Models;
 using Rowerowowo.Repository;
 
@@ -42,10 +35,10 @@ public class VehiclesController : Controller
     }
     public async Task<IActionResult> Delete(Vehicle vehicle)
     {
-        await _vehicleRepository.Delete(vehicle);
-        return View();
+         _vehicleRepository.Delete(vehicle); // tu await nie działa
+        return Redirect("/Vehicles");
     }
-    public async Task<IActionResult> UpdateVehicle(Vehicle vehicle)
+    public async Task<IActionResult> Edit(Vehicle vehicle)
     {
         var result = await _vehicleRepository.Update(vehicle);
         return View(result);

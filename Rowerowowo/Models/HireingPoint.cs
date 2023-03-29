@@ -1,8 +1,10 @@
-﻿namespace Rowerowowo.Models;
+﻿using Rowerowowo.Repository;
 
-public class HireingPoint
+namespace Rowerowowo.Models;
+
+public class HireingPoint : IEntity<int>
 {
     public int Id { get; set; } 
     public string? Name { get; set; }   
-    public List<Vehicle>? vehicles { get; set; }
+    public List<HireingPoint>? vehicles { get; set; }
 }
