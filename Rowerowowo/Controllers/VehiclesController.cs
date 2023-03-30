@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using AutoMapper;
+using Microsoft.AspNetCore.Mvc;
 using Rowerowowo.Models;
 using Rowerowowo.Repository;
 
@@ -7,11 +8,12 @@ namespace Rowerowowo.Controllers;
 public class VehiclesController : Controller
 {
     private readonly IRepository<Vehicle> _vehicleRepository;
+    private readonly IMapper _mapper;
 
-    public VehiclesController(IRepository<Vehicle> vehicleRepository)
+    public VehiclesController(IRepository<Vehicle> vehicleRepository, IMapper mapper)
     {
-
         _vehicleRepository = vehicleRepository;
+        _mapper = mapper;   
     }
     
     public async Task<IActionResult> Index()

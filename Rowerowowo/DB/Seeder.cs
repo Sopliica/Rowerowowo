@@ -35,7 +35,7 @@ public class Seeder
             }
         };
         await context.AddRangeAsync(vehicleTypes);
-        //await context.AddRangeAsync(vehicles);
+        await context.AddRangeAsync(vehicles);
         await context.SaveChangesAsync();
 
     }

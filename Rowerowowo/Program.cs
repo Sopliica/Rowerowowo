@@ -1,6 +1,10 @@
+using AutoMapper;
 using Microsoft.EntityFrameworkCore;
 using Rowerowowo.InMemoryDbContext;
+using Rowerowowo.Mapping;
+using Rowerowowo.Models;
 using Rowerowowo.Repository;
+using Rowerowowo.ViewModels;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -10,6 +14,8 @@ builder.Services.AddControllersWithViews();
 builder.Services.AddDbContext<InMemoryDBContext>(options => options.UseInMemoryDatabase("ATHBikeReantingDatabase"));
 
 builder.Services.AddScoped(typeof(IRepository<>), typeof(Repository<>));
+
+builder.Services.AddAutoMapper(typeof(OrganizationProfile));
 
 var app = builder.Build();
 
@@ -40,5 +46,5 @@ async Task CreateDB(IHost host)
     await using var scope = host.Services.CreateAsyncScope();
     var services = scope.ServiceProvider;
     var context = services.GetRequiredService<InMemoryDBContext>();
-    //await Seeder.Seed(context);
+    await Seeder.Seed(context);
 }
