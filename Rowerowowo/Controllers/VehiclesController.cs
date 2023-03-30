@@ -27,6 +27,14 @@ public class VehiclesController : Controller
         result = await (_vehicleRepository.GetSingle(id));
         return View(result);    
     }
+
+    [HttpGet]
+    public async Task<IActionResult> Create()
+    {
+     
+        return View();
+    }
+    [HttpPost]
     public async Task<IActionResult> Create(Vehicle vehicle)
     {
         Vehicle result;
@@ -35,7 +43,7 @@ public class VehiclesController : Controller
     }
     public async Task<IActionResult> Delete(Vehicle vehicle)
     {
-         _vehicleRepository.Delete(vehicle); // tu await nie działa
+        await _vehicleRepository.Delete(vehicle); // tu await nie działa
         return Redirect("/Vehicles");
     }
     public async Task<IActionResult> Edit(Vehicle vehicle)
