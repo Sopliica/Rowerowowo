@@ -46,5 +46,5 @@ async Task CreateDB(IHost host)
     await using var scope = host.Services.CreateAsyncScope();
     var services = scope.ServiceProvider;
     var context = services.GetRequiredService<InMemoryDBContext>();
-    await Seeder.Seed(context);
+    //await Seeder.Seed(context);
 }
